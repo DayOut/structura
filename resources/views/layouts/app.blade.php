@@ -1,3 +1,4 @@
+<?php if(!isset($menu_cat)) {$menu_cat = " ";}?>
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -12,8 +13,8 @@
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-<!-- <link type="text/css" rel="stylesheet" href="{{ asset('css/materialize.min.css') }}"  media="screen,projection"/>-->
+<!--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/materialize.css') }}"  media="screen,projection"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
@@ -21,71 +22,72 @@
 
 </head>
 <body>
-<nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
-        <ul class="right hide-on-med-and-down">
-            <li><a href="#">Navbar Link</a></li>
-        </ul>
 
-        <ul id="nav-mobile" class="side-nav">
-            <li><a href="#">Navbar Link</a></li>
-        </ul>
-        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
-    </div>
-</nav>
+<div class="fixed-action-btn">
+    <a class="btn-floating btn-large red" href="{{url('create')}}">
+        <i class="large material-icons">mode_edit</i>
+    </a>
+</div>
 
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+    <nav class="indigo darken-5" role="navigation">
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+        <div class="nav-wrapper container"><a id="logo-container" href="{{ url('/') }}" class="brand-logo">{{ config('app.name', 'Laravel') }}</a>
+            @guest
+                <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
+                    <li><a class="nav-link" href="{{ route('register') }}">Register</a></li>
+                </ul>
 
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
+                <ul id="mobile-demo" class="side-nav">
+                    <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
+                    <li><a class="nav-link" href="{{ route('register') }}">Register</a></li>
+                </ul>
+            @else
+            <!-- Dropdown Structure -->
+                <ul id="dropdown1" class="dropdown-content">
+                    <li><a class="dropdown-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        Logout
-                                    </a>
+                            Logout
+                        </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form></li>
+                </ul>
+
+                <ul class="right hide-on-med-and-down">
+                    <li><a class="dropdown-button" href="#!" data-activates="dropdown1">{{ Auth::user()->name }}<i class="material-icons right">arrow_drop_down</i></a></li>
+                </ul>
+            @endguest
+
+
+
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m9">
+                @yield('content')
             </div>
-        </nav>
+            <div class="col s12 m3">
+                <div class="collection">
+                    <a href="#!" class="collection-item <?php if($menu_cat == "news") echo "active"?>">Новости</a>
+                    <a href="#!" class="collection-item <?php if($menu_cat == "photo") echo "active"?>">Фото</a>
+                    <a href="#!" class="collection-item <?php if($menu_cat == "about") echo "active"?>">О нас</a>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 
-    <footer class="page-footer orange">
+
+
+    <footer class="page-footer indigo darken-5">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
@@ -124,8 +126,8 @@
     <!-- Scripts -->
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<!-- <script type="text/javascript" src="{{ asset('js/materialize.min.js') }}"></script>-->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/bin/materialize.js') }}"></script>
+<!-- <script type="text/javascript" src="{{ asset('js/materialize.min.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>-->
+    <script type="text/javascript" src="{{ asset('js/materialize.js') }}"></script>
 </body>
 </html>
