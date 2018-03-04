@@ -4861,11 +4861,17 @@ small {
 
 .card .card-content {
   padding: 24px;
+  padding-bottom: 5px;
   border-radius: 0 0 2px 2px;
+}
+
+.card .card-content img {
+  width:100%;
 }
 
 .card .card-content p {
   margin: 0;
+  padding-bottom: 10px;
   color: inherit;
 }
 

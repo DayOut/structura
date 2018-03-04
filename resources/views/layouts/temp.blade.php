@@ -53,6 +53,42 @@
 
 
 /-----------------------------------------------------------------------------------------------------------------------
+{!! nl2br($post->post_content) !!}
+
+//from albums
+<div class="card hoverable">
+    <div class="card-content white-text">
+        <span class="card-title">{!! $album->title  !!} </span>
+    {!! $album->note !!}
+
+    <!-- <a class="btn-floating halfway-fab waves-effect waves-light green"><i class="material-icons">edit</i></a>
+                            <a class="btn-floating halfway-fab waves-effect waves-light green"><i class="material-icons">edit</i></a>-->
+    </div>
+    <div class="card-action">
+
+        <div class="row">
+            <div class="col s6 m3">
+                <a class="waves-effect waves-teal btn-flat" href="{{ url('post/'.$album->album_id) }}">Далее...</a>
+            </div>
+            @auth
+                <div class="col s6 m4">
+                    <a class="waves-effect waves-teal btn orange" href="{{ url('create/'.$album->album_id) }}">Редактировать</a>
+                </div>
+                <div class="col s6 m3">
+
+                    <form action="{{ url('delete-post/'.$album->album_id) }}" method="POST">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
+                        <button class="btn waves-effect waves-light red darken-1" type="submit" name="action">Удалить
+                            <i class="material-icons right">delete</i>
+                        </button>
+                    </form>
+
+                </div>
+            @endauth
+        </div>
+    </div>
+</div>
 
 /-----------------------------------------------------------------------------------------------------------------------
 <div class="form-group row">

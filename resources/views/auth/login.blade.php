@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -8,6 +9,12 @@
                 <div class="card-header">Login</div>
 
                 <div class="row">
+                    <!--
+                        Hey! You! Look at this amazing form for login:
+                                https://codepen.io/dsenneff/pen/QajVxO
+                        It's really amazing! But i  cant use this form in this project =(
+                        But you can! :D You can tae it because it's free! And... It's fucking AMAZING!!!
+                    -->
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 

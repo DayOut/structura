@@ -32,7 +32,7 @@
 
     <nav class="indigo darken-5" role="navigation">
 
-        <div class="nav-wrapper container"><a id="logo-container" href="{{ url('/') }}" class="brand-logo"><img style="width: 150px; position: relative; top: 5px;" src="{{asset('upload/structura_logo-min.png')}}"></a>
+        <div class="nav-wrapper container"><a id="logo-container" href="{{ url('/') }}" class="brand-logo">{{ config('app.name', 'Laravel') }}</a>
             @guest
                 <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
                 <ul class="right hide-on-med-and-down">
@@ -77,9 +77,9 @@
             <div class="col s12 m3">
 
                 <div class="collection">
-                    <a href="{{url('home')}}" class="collection-item <?php if($menu_cat == "news") echo "active"?>">Новости</a>
-                    <a href="{{url('album')}}" class="collection-item <?php if($menu_cat == "photo") echo "active"?>">Фото</a>
-                    <a href="#{{url('about')}}" class="collection-item <?php if($menu_cat == "about") echo "active"?>">О нас</a>
+                    <a href="#!" class="collection-item <?php if($menu_cat == "news") echo "active"?>">Новости</a>
+                    <a href="#!" class="collection-item <?php if($menu_cat == "photo") echo "active"?>">Фото</a>
+                    <a href="#!" class="collection-item <?php if($menu_cat == "about") echo "active"?>">О нас</a>
 
                 </div>
 
